@@ -36,31 +36,33 @@ async function reproductor(idCanal){
     const audioClips = await fetch(`https://api.audioboom.com/channels/${idCanal}/audio_clips`)
     const audioData = await audioClips.json();
     
-    const element = audioData.body.audio_clips;
-    const elementoIndex = JSON.stringify(element);
+    const dataArray = audioData.body.audio_clips;
     
-    canalInfo.classList.add('active');
-    
-    element.forEach((item,index)=>{
-        if(index==0){
-            canalInfo.innerHTML+=`
-                <div class="logo" id="${index}">
-                    <img id="imgElemento" src="${item.urls.image===undefined? item.channel.urls.logo_image.original:item.urls.image}">
-                    <span id="spanElemento">${item.title}</span>
-                </div>
-                <div class="playback">
-                    <button id="retroceder"><span class="glyphicon glyphicon-step-backward" ></span></button>
-                    <button onclick="play()" id="btnPlayPause"></span>
-                        <audio id="audio" src="${item.urls.high_mp3}"></audio>
-                    <button id="avanzar"><span class="glyphicon glyphicon-step-forward"></span></button>
-                </div>
-                <div class="volumen">
-                    <span class="glyphicon glyphicon-volume-off"></span><button id="avanzar">
-                </div>  
+    dataArray.forEach((element,index) =>{
+       console.log(element)
+       canalInfo.classList.add('active');
+       if(index==0){ 
+           canalInfo.innerHTML=`
+            <div class="logo">
+                <img src="${element.urls.image===undefined? element.channel.urls.logo_image.original:element.urls.image}">
+                <span>${element.title}</span>
+            </div>
+            <div class="playback">
+                <button id="retroceder"><span class="glyphicon glyphicon-step-backward" ></span></button>
+                <button onclick="play()" id="btnPlayPause">
+                    <audio id="audio" src="${element.urls.high_mp3}"></audio>
+               
+                <button id="avanzar"><span class="glyphicon glyphicon-step-forward"></span></button>
+            </div>
+            <div class="volumen">
+                <span class="glyphicon glyphicon-volume-off"></span><button id="avanzar">
+            </div>
+            
             `
             container.appendChild(canalInfo);
-        }
-    });
+            
+       }
+    })
     
 }
 
@@ -71,9 +73,3 @@ function play(){
     audio[isPaused ? "play" : "pause"]();
     btn_playPause.style.backgroundPosition= "0 "+ (isPaused ? "-32px":"0px");
 }
-
-
- 
-
-
-

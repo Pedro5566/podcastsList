@@ -96,11 +96,11 @@ button{
 }
 
 #btnPlayPause{
-    background:white url(http://i.stack.imgur.com/ENFH5.png) no-repeat;
-    border:none;
-    width:32px;
-    height:32px;
-    cursor:pointer;
-    outline:none;
-    border-radius: 50%;
+  background:white url(http://i.stack.imgur.com/ENFH5.png) no-repeat;
+  border:none;
+  width:32px;
+  height:32px;
+  cursor:pointer;
+  outline:none;
+  border-radius: 50%;
 }
